@@ -4,7 +4,7 @@ import time
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.action_chains import ActionChains
 import helpers
-
+from selenium.webdriver.common.by import By
 
 # Instantiate Webdriver
 
@@ -20,7 +20,7 @@ browser = webdriver.Chrome(
 
 
 def getWeather():
-    whole = browser.find_element_by_xpath('/html')
+    whole = browser.find_element(By.XPATH,'/html')
     htmldata = whole.get_attribute("innerHTML")
     html = str(htmldata)
     soup = BeautifulSoup(html, "html.parser")
@@ -43,16 +43,16 @@ page = browser.get("https://play.pokemonshowdown.com/")
 time.sleep(2)
 
 # login
-loginbox = browser.find_element_by_xpath("/html/body/div[1]/div[3]/button[1]")
+loginbox = browser.find_element(By.XPATH, "/html/body/div[1]/div[3]/button[1]")
 loginbox.click()
 
-userbox = browser.find_element_by_name("username")
+userbox = browser.find_element(By.NAME, "username")
 userbox.send_keys(username)
 userbox.send_keys(Keys.ENTER)
 
-time.sleep(.25)
+time.sleep(.55)
 
-passwordbox = browser.find_element_by_name("password")
+passwordbox = browser.find_element(By.NAME, "password")
 passwordbox.send_keys(password)
 passwordbox.send_keys(Keys.ENTER)
 
@@ -62,12 +62,12 @@ input("Press Enter to continue...")
 for k in range(1, 7):
     action = ActionChains(browser)
     xpath = "/html/body/div[4]/div[5]/div/div[3]/div[2]/button[" + str(k) + "]"
-    firstLevelMenu = browser.find_element_by_xpath(xpath)
+    firstLevelMenu = browser.find_element(By.XPATH, xpath)
     action.move_to_element(firstLevelMenu).perform()
 
     time.sleep(.5)
 
-    whole = browser.find_element_by_xpath('/html')
+    whole = browser.find_element(By.XPATH, '/html')
     htmldata = whole.get_attribute("innerHTML")
     html = str(htmldata)
     soup = BeautifulSoup(html, "html.parser")
@@ -85,7 +85,7 @@ while kinpu == "":
     weather = getWeather()
 
     # Get Opponents pokemon
-    curropponent = browser.find_element_by_xpath(
+    curropponent = browser.find_element(By.XPATH,
         "/html/body/div[4]/div[1]/div/div[6]/div[2]/strong").text.split(" ")
 
     name = curropponent[0]
