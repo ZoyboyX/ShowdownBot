@@ -12,8 +12,8 @@ import helpers
 option = webdriver.ChromeOptions()
 option.add_argument("— incognito")
 
-username = "Zoyboy X"
-password = "Chweechy1967"
+username = "zoybot"
+password = "RobotRobot"
 
 browser = webdriver.Chrome(
     executable_path='/usr/lib/chromium-browser/chromedriver', chrome_options=option)
